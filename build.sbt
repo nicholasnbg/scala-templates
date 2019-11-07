@@ -1,7 +1,13 @@
+
 val Http4sVersion = "0.20.8"
 val CirceVersion = "0.11.1"
 val Specs2Version = "4.1.0"
 val LogbackVersion = "1.2.3"
+
+enablePlugins(JavaAppPackaging, AshScriptPlugin)
+
+dockerBaseImage := "openjdk:8-jre-alpine"
+version in Docker := "0.1.1"
 
 lazy val root = (project in file("."))
   .settings(

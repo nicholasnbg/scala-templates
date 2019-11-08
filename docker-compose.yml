@@ -4,7 +4,7 @@ services:
     build:
       context: ./target/docker/stage
     restart: always
-    container_name: book_app
+    container_name: book_app_postgres
     working_dir: /app
     volumes:
       - ".:/app"
@@ -14,9 +14,10 @@ services:
       - 7777:7777
   db:
     container_name: example_db_postgress
-    image: postgres:12
+    image: postgres:11
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: example
     ports:
       - 5432:5432

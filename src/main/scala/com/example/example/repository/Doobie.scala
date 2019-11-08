@@ -10,7 +10,7 @@ object Doobie {
   implicit val cs = IO.contextShift(ExecutionContext.global)
 
   val xa: Aux[IO, Unit] = Transactor.fromDriverManager[IO](
-    "org.postgres.Driver", "jbdc:postgres:example", "postgres", "testpass"
+    "org.postgresql.Driver", "jdbc:postgresql:example", "postgres", "testpass"
   )
 
 }

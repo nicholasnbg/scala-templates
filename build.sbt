@@ -24,6 +24,7 @@ lazy val root = (project in file("."))
       "org.http4s"      %% "http4s-blaze-client" % Http4sVersion,
       "org.http4s"      %% "http4s-circe"        % Http4sVersion,
       "org.http4s"      %% "http4s-dsl"          % Http4sVersion,
+      "org.flywaydb"    % "flyway-core"          % "5.2.4",
       "io.circe"        %% "circe-generic"       % CirceVersion,
       "org.specs2"      %% "specs2-core"         % Specs2Version % "test",
       "org.tpolecat"    %% "doobie-specs2"       % "0.8.4"       % "test",

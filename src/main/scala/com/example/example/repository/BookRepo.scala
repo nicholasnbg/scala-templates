@@ -55,15 +55,17 @@ object BookRepo {
   class DoobieImpl(xa: Aux[IO, Unit]) extends BookRepo {
     override def addBook(book: Book): IO[BookId] = {
       val bookId = BookId()
-      sql"insert into book (id, title, author) values (${bookId.value} ,${book.title}, ${book.author}"
+      sql"insert into book (id, title, author) values (${bookId.value} ,${book.title}, ${book.author})"
         .update
         .run
-
-      IO.pure(bookId)
+        .transact(xa)
+        .map(_ => bookId)
     }
 
     override def getBook(id: BookId): IO[Option[BookWithId]] = {
-      sql"select id, title, author from book where id = ${id.value}".query[BookWithId].option.transact(xa)
+      sql"select id, title, author from book where id = ${id.value}".query[BookWithId]
+        .option
+        .transact(xa)
     }
 
     override def deleteBook(id: BookId): IO[Either[String, Unit]] = {
